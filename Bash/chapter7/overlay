@@ -1,0 +1,28 @@
+#! /bin/bash
+#: Title		: overlay
+#: Description	: Place one string over the top of another
+#: Options		: None
+
+_overlay()
+{ #@ USAGE: _overlay STRING SUBSTRING START
+  #@ RESULT: in $_OVERLAY
+
+  local string=$1
+  local sub=$2
+  local start=$3
+  local left right
+
+  left=${string:0:start-1} ## See note below
+  right=${string:start+${#sub}-1}
+
+  _OVERLAY=$left$sub$right
+}
+
+overlay()
+{
+  _overlay "$@" && printf "%s\n" "$_OVERLAY"
+}
+
+## Note: the arithmetic within the substring expansion doesn't need the full
+##       POSIX arithmetic syntax; bash will evaluate an expression if it finds
+##       one in the place of an integer

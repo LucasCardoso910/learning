@@ -1,0 +1,27 @@
+#! /bin/bash
+#: Title		: upword
+#: Description	: Convert word to uppercase
+#: Options		: None
+
+_upword()
+{
+  #@ Capitalizes the entire string in $1
+  #@ USAGE: upword STRING
+  #@ RESULT: in _UPWORD
+
+  local word=$1
+  source upr
+
+  _UPWORD=
+  while [ -n "$word" ]; do ## loop until nothing is left in $word
+    _upr "$word"
+    _UPWORD=$_UPWORD${_UPR:0:1}
+    word=${word#?} ## remove the first character from $word
+  done
+}
+
+upword()
+{
+  _upword "$@"
+  printf "%s\n" "$_UPWORD"
+}

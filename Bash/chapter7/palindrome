@@ -1,0 +1,54 @@
+#! /bin/bash
+#: Title		    : palindrome
+#: Description	: Given a string, returns 0 if it is a palindrome
+#: Options		  : v
+
+_clnstr()
+{
+  #@ Clean a string by removing its ponctuation and whitespace
+  #@ USAGE: _clnstr STRING
+  #@ RESULT: in _CLNSTR
+
+  _CLNSTR=$(echo "${1}" | tr -d "[:punct:]")       ## removes punctuation
+  _CLNSTR=$(echo "${_CLNSTR}" | tr -d "[:space:]") ## removes whitespaces
+}
+
+function palindrome()
+{
+  #@ USAGE: palindrome STRING
+  #@ RESULT: in the return of the function (if has -v, it is also printed)
+
+  source revstr
+  source upword
+
+  local OPTIND
+  local reverse=
+  local verbose=0
+
+  optstring=v
+  while getopts $optstring opt; do
+    case $opt in
+      v) verbose=$(($verbose + 1)) ;;
+      *) return 2 ;;
+    esac
+  done
+  shift "$(($OPTIND - 1))"
+
+  _clnstr "$@"
+  _upword $_CLNSTR
+  _revstr $_UPR
+
+  if [[ "$_UPR" = "$_REVSTR" ]]; then
+    if [[ $verbose -gt 0 ]]; then
+      printf "%s\n" "\"$1\" is a palindrome"
+    fi
+
+    return 0
+  else
+    if [[ $verbose -gt 0 ]]; then
+      printf "%s\n" "\"$1\" is not a palindrome"
+    fi
+
+    return 1
+  fi
+}

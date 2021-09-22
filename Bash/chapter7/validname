@@ -1,0 +1,16 @@
+#! /bin/bash
+#: Title		: validname
+#: Description	: Check $1 for a valid variable or function name
+#: Options		: None
+
+validname()
+{
+  #@ USAGE: validname varname
+  #@ RESULT: return value
+
+  case $1 in
+    ## doesn't begin with a letter or an underscore, or
+    ## contains something that is not a letter, a number, or an underscore
+    [!a-zA-Z_]* | *[!a-zA-Z0-9_]*) return 1 ;;
+  esac
+}

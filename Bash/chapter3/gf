@@ -1,0 +1,19 @@
+#! /bin/bash
+#: Title		: Get File
+#: Date			: 2021/09/24
+#: Author		: Lucas Cardoso dos Santos <lucascardoso910@gmail.com>
+#: Version		: 1.0
+#: Description	: Gets a file name until it exists
+#: Options		: None
+
+printf "Insert a file: "
+read file
+
+#TODO: Discover why "\n" is evaluated as an existing file...
+until test -e $file
+do
+    printf "Please, insert an existing file: "
+    read file
+done
+
+echo $file

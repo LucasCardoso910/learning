@@ -1,0 +1,50 @@
+#! /bin/bash
+#: Title		: trim
+#: Description	: Trim unwanted characters
+#: Options		: None
+
+_trim()
+{
+  #@ Trim spaces (or character in $2) from $1
+  #@ USAGE: _trim STRING [CHARACTER]
+  #@ RESULT: in _TRIM
+
+  _TRIM=$1
+
+  _ltrim $_TRIM $2
+  _TRIM=$_LTRIM
+
+  _rtrim $_TRIM $2
+  _TRIM=$_RTRIM
+}
+
+_ltrim()
+{
+  #@ Trim spaces (or character in $2) from the left of $1
+  #@ USAGE: _ltrim STRING [CHARACTER]
+  #@ RESULT: in _LTRIM
+
+  local trim_string
+
+  _LTRIM=$1
+  trim_string=${1%%[!${2:- }]*}
+  _LTRIM=${_LTRIM#"$trim_string"}
+}
+
+_rtrim()
+{
+  #@ Trim spaces (or character in $2) from the right of $1
+  #@ USAGE: _rtrim STRING [CHARACTER]
+  #@ RESULT: in _RTRIM
+
+  local trim_string
+
+  _RTRIM=$1
+  trim_string=${1##*[!${2:- }]}
+  _RTRIM=${_RTRIM%"$trim_string"}
+}
+
+trim()
+{ #@ Trim spaces (or character in $2) from $1 and print the result
+  _trim "$@" && printf "%s\n" "$_TRIM"
+}

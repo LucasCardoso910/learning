@@ -1,0 +1,38 @@
+#! /bin/bash
+#: Title		: nb20and30
+#: Date			: 2021/09/23
+#: Author		: Lucas Cardoso dos Santos <lucascardoso910@gmail.com>
+#: Version		: 1.0
+#: Description	: Gets a number from user. Loops while number is not bigger than
+#:                or equal to 20 and less than or equal to 30
+#: Options		: None
+
+notSatisfactoryCondition(){
+    case $1 in  ## $1 stores the first argument sended to this function
+    ''|*[!0-9]*) ## If it is not an empty string or a number
+        printf "The input is not a number. Try again: "
+        read input ## Functions in bash can access other variables
+        true ## Return a true state
+        ;;
+    *)
+        if [ $1 -ge 20 -a $1 -le 30 ] ## $1 >= 20 and $1 <= 30
+        then
+            false ## Return a false state
+        else
+            printf "The input number is not valid. Try again: "
+            read input
+            true
+        fi
+        ;;
+        
+    esac
+
+}
+
+input=$1 ## Gets the argument from the command line and stores in this variable
+while notSatisfactoryCondition $input
+do
+    continue ## Loops until the condition is met, but doesn't do anything until then
+done
+
+printf "Your number is %d\n" $input

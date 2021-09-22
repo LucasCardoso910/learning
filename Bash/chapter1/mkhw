@@ -1,0 +1,13 @@
+#! /bin/bash
+#: Title		: mkhw
+#: Date			: 2021/09/21
+#: Author		: Lucas Cardoso dos Santos <lucascardoso910@gmail.com>
+#: Version		: 1.0
+#: Description	: Creates a "Hello, World!" script in the bpl folder
+#: Options		: None
+
+cd $HOME/bpl/bin
+touch hw.sh
+printf "%s\n\n" "#! /bin/bash" >> hw.sh
+printf "%s" "printf \"%s\" \"Hello, World!\n\"" >> hw.sh
+chmod +x hw.sh

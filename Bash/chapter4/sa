@@ -1,0 +1,8 @@
+#! /bin/bash
+#: Title		: sa
+#: Description	: prints all command-line arguments in separeted lines
+#: Options		: None
+
+pre=:
+post=:
+printf "$pre%s$post\n" "$@"

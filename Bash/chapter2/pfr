@@ -1,0 +1,14 @@
+#! /bin/bash
+#: Title		: pfr (print formatted random)
+#: Date			: 2021/09/22
+#: Author		: Lucas Cardoso dos Santos <lucascardoso910@gmail.com>
+#: Version		: 1.0
+#: Description	: Prints a series of random numbers in a specific format 
+#: Options		: None
+
+printf "%d,%d\n" \
+    $RANDOM $RANDOM \
+    $RANDOM $RANDOM \
+    $RANDOM $RANDOM \
+    $RANDOM $RANDOM \
+    | tee results.txt

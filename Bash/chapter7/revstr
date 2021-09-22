@@ -1,0 +1,19 @@
+#! /bin/bash
+#: Title		: revstr
+#: Description	: Reverse the order of a string; store result in _REVSTR
+#: Options		: None
+
+_revstr()
+{
+  #@ USAGE: revstr STRING
+  #@ RESULT: in _REVSTR
+
+  var=$1
+  _REVSTR=
+
+  while [ -n "$var" ]; do
+    char=${var:${#var}-1:1}
+    _REVSTR+=$char
+    var=${var%?}
+  done
+}

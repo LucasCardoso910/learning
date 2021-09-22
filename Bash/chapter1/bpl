@@ -1,0 +1,11 @@
+#! /bin/bash
+#: Title		: bp1
+#: Author		: Lucas Cardoso dos Santos <lucascardoso910@gmail.com>
+#: Version		: 1.0
+#: Description	: Create a folder named bpl in HOME folder
+#: Options		: None
+
+cd $HOME
+mkdir bpl
+mkdir bpl/bin
+mkdir bpl/scripts
